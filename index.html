@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f7f7f7, #e1e1e1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .country,
+      .cities {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 250px;
+        margin: 15px;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        background: #f9f9f9;
+        transition: 0.3s;
+      }
+
+      select:hover {
+        border-color: #3498db;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: #2980b9;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+      }
+
+      .container {
+        display: flex;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="country">
+        <h2>Country</h2>
+        <select class="country-select"></select>
+      </div>
+      <div class="cities">
+        <h2>Cities</h2>
+        <select class="city-select"></select>
+      </div>
+    </div>
+    <script>
+      const countriesData = {
+        afghanistan: [
+          "Kabul",
+          "Kandahar",
+          "Herat",
+          "Mazar-i-Sharif",
+          "Jalalabad",
+        ],
+        iran: ["Tehran", "Mashhad", "Isfahan", "Karaj", "Shiraz"],
+        iraq: ["Baghdad", "Basra", "Sulaymaniyah", "Erbil", "Najaf"],
+        syria: ["Damascus", "Aleppo", "Homs", "Hama", "Latakia"],
+        turkey: ["Istanbul", "Ankara", "Izmir", "Bursa", "Adana"],
+        lebanon: ["Beirut", "Tripoli", "Sidon", "Tyre", "Jounieh"],
+      };
+
+      const countrySelect = document.querySelector(".country-select");
+      const citySelect = document.querySelector(".city-select");
+
+      const countryList = Object.keys(countriesData);
+
+      countryList.forEach((country) => {
+        const countryOption = document.createElement("option");
+        countryOption.value = country;
+        countryOption.textContent =
+          country.charAt(0).toUpperCase() + country.slice(1);
+        countrySelect.append(countryOption);
+      });
+
+      countrySelect.addEventListener("change", function () {
+        const selectedCountry = countrySelect.value;
+        const cities = countriesData[selectedCountry];
+        citySelect.innerHTML = "";
+
+        cities.forEach((city) => {
+          const cityOption = document.createElement("option");
+          cityOption.value = city;
+          cityOption.textContent = city;
+          citySelect.append(cityOption);
+        });
+      });
+    </script>
+  </body>
+</html>
